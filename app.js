@@ -10,8 +10,9 @@ app.use(bodyParser.json())
 app.use(cors())
 
 // app.use("/animals", require("./routes/animals"))
-app.use("/", function(request, response) {
-    response.send(response)
+app.get("/", function(request, response) {
+    // response.send(response)
+    response.send('fart')
 })
 
 app.use((request, response, next) => {
