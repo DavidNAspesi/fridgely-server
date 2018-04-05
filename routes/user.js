@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-
+const chance = "whywhywhy"
 const queries = require('../queries')
 
 router.get("/", (request, response, next) => {
