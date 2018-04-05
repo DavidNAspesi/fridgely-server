@@ -9,16 +9,20 @@ app.use(morgan("dev"))
 app.use(bodyParser.json())
 app.use(cors())
 
-// app.use("/animals", require("./routes/animals"))
-app.get("/", function(request, response) {
-    // response.send(response)
-    response.send('fart')
+app.use('/user', require('./routes/user'))
+
+app.use((req, res, next) => {
+    const err = new Error("Not Found")
+    err.status = 404
+    next(err)
 })
 
-app.use((request, response, next) => {
-    response.status(404).send()
-}).use((error, request, response, next) => {
-    response.status(500).send(error.message)
+app.use((err, req, res, next) => {
+    res.status(err.status || 500)
+    res.json({
+      message: err.message,
+      error: req.app.get("env") === "development" ? err.stack : {}
+    })
 })
 
 module.exports = app
