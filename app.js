@@ -10,6 +10,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.use('/user', require('./routes/user'))
+app.use('/image', require('./routes/image'))
 
 app.use((req, res, next) => {
     const err = new Error("Not Found")
