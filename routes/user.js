@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const chance = "whywhywhy"
 const queries = require('../queries')
 
 router.get("/", (request, response, next) => {
@@ -16,7 +15,8 @@ router.get("/:id", (request, response, next) => {
 });
 
 router.post("/", (request, response, next) => {
-    queries.create(request.body).then(users => {
+    queries.create(request.body)
+    .then(users => {
         response.status(201).json({users});
     }).catch(next);
 });
