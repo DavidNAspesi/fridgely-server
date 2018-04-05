@@ -10,7 +10,18 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.use('/user', require('./routes/user'))
-app.use('/image', require('./routes/image'))
+
+app.post('/image', function (req, res) {
+  console.log(req.body);
+  res = res.status(200);
+  if (req.get('Content-Type')) {
+    console.log("Content-Type: " + req.get('Content-Type'));
+    res = res.type(req.get('Content-Type'));
+  }
+  res.send(req.body);
+});
+
+// app.use('/image', require('./routes/image'))
 
 app.use((req, res, next) => {
     const err = new Error("Not Found")
