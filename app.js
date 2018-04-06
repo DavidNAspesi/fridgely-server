@@ -34,7 +34,7 @@ const upload = multer({
     s3,
     bucket: "fridgely",
     key: (request, file, next) => {
-      next(null, `${Date.now()}_${file.originalname}`);
+      next(null, Date.now().toString() + '.jpg');
     }
   })
 });
@@ -45,7 +45,7 @@ const upload = multer({
 //   });
 // });
 
-app.post("/upload", upload.single("image"), (request, response) => {
+app.post("/upload", upload.single("photo"), (request, response) => {
   response.json({
     imgUrl: `${request.file}`
   });
