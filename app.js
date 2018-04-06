@@ -72,7 +72,7 @@ function runTheLoop() {
         })
 }
 
-let poopypoopypants = ''
+var poopypoopypants = ''
 function runThisShit(foodItems) {
   console.log("made it to runThisShit")
   let foodURL = 'http://food2fork.com/api/search?key=5761d9561765b7936c21a38f6afa5786&q=' + foodItems
@@ -81,9 +81,9 @@ function runThisShit(foodItems) {
     return res.json()
   })
   .then(function(res) {
-    for (let i=0;i<15;i++) {
-      console.log(res.recipes[i].title + res.recipes[i].recipe_id)
-    }
+    // for (let i=0;i<15;i++) {
+    //   console.log(res.recipes[i].title + res.recipes[i].recipe_id)
+    // }
     var poopypoopypants = res.recipes
   })
   .catch(function(err) {
