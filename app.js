@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 const multer = require('multer')
-const upload = multer({ dest: 'uploads/' })
+// const upload = multer({ dest: 'uploads/' })
 
 const morgan = require("morgan")
 const bodyParser = require("body-parser")
@@ -19,8 +19,6 @@ app.use('/user', require('./routes/user'))
 app.post('/image', upload.single('image'), function (req, res) {
   console.log(req.body)
   res = res.status(201)
-
-
 
   res.send(req.body)
 })
