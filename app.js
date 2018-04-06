@@ -43,7 +43,7 @@ const s3 = new aws.S3({
 const upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'fridgely',
+    bucket: process.env.AWS_BUCKET,
     acl: 'public-read',
     metadata(req, file, cb) {
       cb(null, {fieldName: file.fieldname});
@@ -55,7 +55,7 @@ const upload = multer({
 })
 
 app.post("/upload", upload.single("photo"), (req, res) => {
-  res.send("Successfully Uploaded"  + req.file + "!")
+  res.send(req.file)
 });
 
 app.use((req, res, next) => {
