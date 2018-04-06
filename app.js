@@ -55,7 +55,7 @@ const upload = multer({
 })
 
 app.post("/upload", upload.single("photo"), (req, res) => {
-  response.json({
+  res.json({
     imgUrl: `${req.file}`,
   });
 
