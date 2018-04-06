@@ -48,6 +48,9 @@ const upload = multer({
 })
 
 app.post("/upload", upload.single("photo"), (req, res) => {
+
+  
+
   res.send({
     url: req.savedUrl,
     file: req.file
