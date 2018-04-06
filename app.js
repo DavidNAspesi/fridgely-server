@@ -87,11 +87,9 @@ function runThisShit(foodItems) {
   })
 }
 
-function getRecipes(poop) {
+function getRecipes(recipes) {
   app.get("/recipes", (request, response, next) => {
-    response.json({
-      poop
-    });
+    response.json().send({recipes})
   });
 }
 
