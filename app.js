@@ -29,21 +29,29 @@ const s3 = new aws.S3({
   }
 })
 
+// const upload = multer({
+//   storage: multerS3({
+//     s3,
+//     bucket: "fridgely",
+//     key: (request, file, next) => {
+//       next(null, Date.now().toString() + '.jpg');
+//     }
+//   })
+// });
+
 const upload = multer({
   storage: multerS3({
     s3,
-    bucket: "fridgely",
-    key: (request, file, next) => {
-      next(null, Date.now().toString() + '.jpg');
+    bucket: process.env.AWS_BUCKET,
+    acl: 'public-read',
+    metadata(req, file, cb) {
+      cb(null, {fieldName: file.fieldname});
+    },
+    key(req, file, cb) {
+      cb(null, Date.now().toString() + '.jpg');
     }
   })
-});
-
-// app.get("/upload", (request, response, next) => {
-//   response.json({
-//     message: "Testing out the upload route"
-//   });
-// });
+})
 
 app.post("/upload", upload.single("photo"), (request, response) => {
   response.json({
