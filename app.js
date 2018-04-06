@@ -22,7 +22,7 @@ app.use('/user', require('./routes/user'))
 
 const s3 = new aws.S3({
   apiVersion: "2006-03-01",
-  region: "us-east-1",
+  region: "us-west-2",
   credentials: {
     secretAccessKey: process.env.AWS_SECRET_KEY,
     accessKeyId: process.env.AWS_ACCESS_KEY_ID
@@ -42,7 +42,7 @@ const s3 = new aws.S3({
 const upload = multer({
   storage: multerS3({
     s3,
-    bucket: 'fridge',
+    bucket: process.env.AWS_BUCKET,
     acl: 'public-read',
     metadata(req, file, cb) {
       cb(null, {fieldName: file.fieldname});
