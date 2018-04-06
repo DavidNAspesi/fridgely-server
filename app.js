@@ -100,7 +100,6 @@ app.get("/cummy", (request, response, next) => {
 //   });
 // }
 
-runTheLoop()
 
 app.post("/upload", upload.single("photo"), (req, res, next) => {
   runTheLoop().then(function(results) {
