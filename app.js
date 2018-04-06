@@ -54,7 +54,7 @@ const upload = multer({
   })
 })
 
-app.post("/upload", upload.single("photo"), (req, res) => {
+app.post("/upload", form.single("image"), (req, res) => {
   res.send("Successfully Uploaded"  + req.file + "!")
 
 });
