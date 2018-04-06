@@ -59,46 +59,45 @@ function runTheLoop() {
     apiKey: theApiKey
     })
     // app.models.predict(Clarifai.FOOD_MODEL, req.savedUrl)
-    app.models.predict(Clarifai.FOOD_MODEL, 'https://upload.wikimedia.org/wikipedia/commons/c/cc/Yours_Food_Logo.jpg')
+    return app.models.predict(Clarifai.FOOD_MODEL, 'https://upload.wikimedia.org/wikipedia/commons/c/cc/Yours_Food_Logo.jpg')
         .then(function(response) {
           return response.outputs[0].data.concepts[1].name
         })
         .then(function(res) {
           console.log(res)
-          runThisShit(res)
-        })
-        .catch(function(err) {
-          console.error(err)
+          return runThisShit(res)
         })
 }
 
 function runThisShit(foodItems) {
   console.log("made it to runThisShit")
   let foodURL = 'http://food2fork.com/api/search?key=5761d9561765b7936c21a38f6afa5786&q=' + foodItems
-  fetch(foodURL)
+  return fetch(foodURL)
   .then(function(res) {
     return res.json()
   })
   .then(function(res) {
-    getRecipes(res.recipes)
-  })
-  .catch(function(err) {
-    console.log(err)
+    return getRecipes(res.recipes)
   })
 }
 
 function getRecipes(recipes) {
   app.get("/recipes", (request, response, next) => {
-    response.json().send({recipes})
+    response.json({recipes})
   });
 }
 
-app.post("/upload", upload.single("photo"), (req, res) => {
+app.post("/upload", upload.single("photo"), (req, res, next) => {
   runTheLoop()
-  res.json().send({
-    url: req.savedUrl,
-    data: runTheLoop()
+  .then(function(results) {
+    res.json({
+      url: req.savedUrl,
+      data: results
+    })
   })
+  .catch(next)
+  // .catch(err => next(err))
+
 })
 
 app.use((req, res, next) => {
@@ -108,11 +107,12 @@ app.use((req, res, next) => {
 })
 
 app.use((err, req, res, next) => {
-    res.status(err.status || 500)
-    res.json({
-      message: err.message,
-      error: req.app.get("env") === "development" ? err.stack : {}
-    })
+  console.log('ERROR', err);
+  res.status(err.status || 500)
+  res.json({
+    message: err.message,
+    error: req.app.get("env") === "development" ? err.stack : {}
+  })
 })
 
 module.exports = app
