@@ -47,7 +47,7 @@ const upload = multer({
 
 app.post("/upload", upload.single("photo"), (req, res) => {
   // console.log(urlName)
-  res.send(urlName)
+  res.json().send("FUUUCK")
 });
 
 app.use((req, res, next) => {
