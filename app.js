@@ -72,7 +72,7 @@ function runTheLoop() {
         })
 }
 
-var poopypoopypants = ''
+var fart = ''
 function runThisShit(foodItems) {
   console.log("made it to runThisShit")
   let foodURL = 'http://food2fork.com/api/search?key=5761d9561765b7936c21a38f6afa5786&q=' + foodItems
@@ -89,12 +89,12 @@ function runThisShit(foodItems) {
   .catch(function(err) {
     console.log(err)
   })
-  getRecipes(poopypoopypants)
+  getRecipes(fart)
 }
-const getRecipes = function(cum) {
+const getRecipes = function(poop) {
 app.get("/recipes", (request, response, next) => {
   response.json({
-    cum
+    poop
   });
 });
 }
