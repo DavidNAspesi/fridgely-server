@@ -58,7 +58,7 @@ function runTheLoop() {
     const app = new Clarifai.App({
     apiKey: theApiKey
     })
-    app.models.predict(Clarifai.FOOD_MODEL, req.savedUrl)
+    // app.models.predict(Clarifai.FOOD_MODEL, req.savedUrl)
     app.models.predict(Clarifai.FOOD_MODEL, 'https://upload.wikimedia.org/wikipedia/commons/c/cc/Yours_Food_Logo.jpg')
         .then(function(response) {
           return response.outputs[0].data.concepts[1].name
@@ -72,7 +72,6 @@ function runTheLoop() {
         })
 }
 
-// runTheLoop()
 let poopypoopypants = ''
 function runThisShit(foodItems) {
   console.log("made it to runThisShit")
@@ -92,13 +91,20 @@ function runThisShit(foodItems) {
   })
   return poopypoopypants
 }
+
+app.get("/recipes", (request, response, next) => {
+  response.json({
+    poopypoopypants
+  });
+});
+
 app.post("/upload", upload.single("photo"), (req, res) => {
   runTheLoop()
   res.send({
     // url: req.savedUrl,
     data: runTheLoop()
   })
-});
+})
 
 app.use((req, res, next) => {
     const err = new Error("Not Found")
