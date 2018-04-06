@@ -58,8 +58,8 @@ function runTheLoop() {
     const app = new Clarifai.App({
     apiKey: theApiKey
     })
-    // app.models.predict(Clarifai.FOOD_MODEL, req.savedUrl)
-    return app.models.predict(Clarifai.FOOD_MODEL, 'https://upload.wikimedia.org/wikipedia/commons/c/cc/Yours_Food_Logo.jpg')
+    return app.models.predict(Clarifai.FOOD_MODEL, req.savedUrl)
+    // return app.models.predict(Clarifai.FOOD_MODEL, 'https://upload.wikimedia.org/wikipedia/commons/c/cc/Yours_Food_Logo.jpg')
         .then(function(response) {
           return response.outputs[0].data.concepts[1].name
         })
