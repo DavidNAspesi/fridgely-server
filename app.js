@@ -23,24 +23,24 @@ app.post('/image', upload.single('image'), function (req, res) {
   res.send(req.body)
 })
 
-const s3 = new aws.S3({
-  apiVersion: "2006-03-01",
-  region: "us-east-1",
-  credentials: {
-    secretAccessKey: process.env.AWS_SECRET_KEY,
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID
-  }
-});
-
-const upload = multer({
-  storage: multerS3({
-    s3,
-    bucket: "fridgely",
-    key: (request, file, next) => {
-      next(null, `${Date.now()}_${file.originalname}`);
-    }
-  })
-});
+// const s3 = new aws.S3({
+//   apiVersion: "2006-03-01",
+//   region: "us-east-1",
+//   credentials: {
+//     secretAccessKey: process.env.AWS_SECRET_KEY,
+//     accessKeyId: process.env.AWS_ACCESS_KEY_ID
+//   }
+// })
+//
+// const upload = multer({
+//   storage: multerS3({
+//     s3,
+//     bucket: "fridgely",
+//     key: (request, file, next) => {
+//       next(null, `${Date.now()}_${file.originalname}`);
+//     }
+//   })
+// });
 
 app.get("/upload", (request, response, next) => {
   response.json({
