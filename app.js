@@ -80,16 +80,31 @@ function runThisShit(foodItems) {
     return getRecipes(res.recipes)
   })
 }
+// var shit = []
+//
+// app.get("/recipes", (request, response, next) => {
+//   response.send(shit)
+// });
+//
+// function getRecipes(recipes) {
+//   var shit = recipes
+//   console.log(shit);
+// }
+app.get("/recipes", (request, response, next) => {
+  response.send('shit')
+});
 
 function getRecipes(recipes) {
+  console.log(recipes);
   app.get("/recipes", (request, response, next) => {
-    response.json({recipes})
+    response.send('shit')
   });
 }
 
+runTheLoop()
+
 app.post("/upload", upload.single("photo"), (req, res, next) => {
-  runTheLoop()
-  .then(function(results) {
+  runTheLoop().then(function(results) {
     res.json({
       url: req.savedUrl,
       data: results
