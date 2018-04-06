@@ -30,8 +30,8 @@ const s3 = new aws.S3({
   }
 })
 
-var urlName = Date.now().toString()
 const upload = multer({
+
   storage: multerS3({
     s3: s3,
     bucket: process.env.AWS_BUCKET,
@@ -40,14 +40,18 @@ const upload = multer({
       cb(null, {fieldName: file.fieldname});
     },
     key(req, file, cb) {
-      cb(null, urlName);
+      var fileName = new Date().toISOString().replace(/:/g, '-') + '.jpg'
+      req.savedUrl = `https://s3.amazonaws.com/s3/buckets/fridgely/${fileName}`
+      cb(null, fileName);
     }
   })
 })
 
 app.post("/upload", upload.single("photo"), (req, res) => {
-  // console.log(urlName)
-  res.json().send("FUUUCK")
+  res.send({
+    url: req.savedUrl,
+    file: req.file
+  })
 });
 
 app.use((req, res, next) => {
