@@ -72,7 +72,7 @@ function runTheLoop() {
         })
 }
 
-var fart = ''
+// var fart = ''
 function runThisShit(foodItems) {
   console.log("made it to runThisShit")
   let foodURL = 'http://food2fork.com/api/search?key=5761d9561765b7936c21a38f6afa5786&q=' + foodItems
@@ -81,22 +81,20 @@ function runThisShit(foodItems) {
     return res.json()
   })
   .then(function(res) {
-    // for (let i=0;i<15;i++) {
-    //   console.log(res.recipes[i].title + res.recipes[i].recipe_id)
-    // }
+    fart = res.recipes
     getRecipes(res.recipes)
   })
   .catch(function(err) {
     console.log(err)
   })
-  getRecipes(fart)
+  // getRecipes(fart)
 }
 const getRecipes = function(poop) {
-app.get("/recipes", (request, response, next) => {
-  response.json({
-    poop
+  app.get("/recipes", (request, response, next) => {
+    response.json({
+      poop
+    });
   });
-});
 }
 
 app.post("/upload", upload.single("photo"), (req, res) => {
