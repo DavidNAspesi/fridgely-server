@@ -84,24 +84,24 @@ function runThisShit(foodItems) {
     // for (let i=0;i<15;i++) {
     //   console.log(res.recipes[i].title + res.recipes[i].recipe_id)
     // }
-    var poopypoopypants = res.recipes
   })
   .catch(function(err) {
     console.log(err)
   })
-  return poopypoopypants
+  getRecipes(poopypoopypants)
 }
-
+const getRecipes = function(cum) {
 app.get("/recipes", (request, response, next) => {
   response.json({
-    poopypoopypants
+    cum
   });
 });
+}
 
 app.post("/upload", upload.single("photo"), (req, res) => {
   runTheLoop()
-  res.send({
-    // url: req.savedUrl,
+  res.json().send({
+    url: req.savedUrl,
     data: runTheLoop()
   })
 })
