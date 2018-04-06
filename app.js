@@ -47,12 +47,45 @@ const upload = multer({
   })
 })
 
+function runThisShit(foodItems) {
+  console.log("made it to runThisShit")
+  let foodURL = 'http://food2fork.com/api/search?key=5761d9561765b7936c21a38f6afa5786&q=' + foodItems
+  fetch(foodURL)
+    .then(function(res) {
+      return res.json()
+    })
+    .then(function(res) {
+      for (let i=0;i<15;i++) {
+        console.log(res.recipes[i].title + res.recipes[i].recipe_id)
+      }
+      return res
+    })
+    .catch(function(err) {
+      console.log(err)
+    })
+}
+
+function runTheLoop() {
+    let nameStuff = ''
+    const app = new Clarifai.App({
+    apiKey: theApiKey
+    })
+    app.models.predict(Clarifai.FOOD_MODEL, req.savedUrl)
+        .then(function(response) {
+          return response.outputs[0].data.concepts[1].name
+        })
+        .then(function(res) {
+          runThisShit(res)
+        })
+        .catch(function(err) {
+          console.error(err)
+        })
+}
+
 app.post("/upload", upload.single("photo"), (req, res) => {
-
-  
-
+  runTheLoop()
   res.send({
-    url: req.savedUrl,
+    // url: req.savedUrl,
     file: req.file
   })
 });
