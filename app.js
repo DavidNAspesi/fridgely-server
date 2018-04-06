@@ -13,12 +13,12 @@ app.use(cors())
 
 app.use('/user', require('./routes/user'))
 
-app.post('/image', upload.single('image'), function (req, res) {
-  console.log(req.body)
-  res = res.status(201)
-
-  res.send(req.body)
-})
+// app.post('/image', upload.single('image'), function (req, res) {
+//   console.log(req.body)
+//   res = res.status(201)
+//
+//   res.send(req.body)
+// })
 
 const s3 = new aws.S3({
   apiVersion: "2006-03-01",
