@@ -30,8 +30,8 @@ const s3 = new aws.S3({
   }
 })
 
+var urlName = Date.now().toString()
 const upload = multer({
-  var urlName = Date.now().toString()
   storage: multerS3({
     s3: s3,
     bucket: process.env.AWS_BUCKET,
@@ -46,7 +46,7 @@ const upload = multer({
 })
 
 app.post("/upload", upload.single("photo"), (req, res) => {
-  console.log(urlName)
+  // console.log(urlName)
   res.send(urlName)
 });
 
