@@ -34,7 +34,7 @@ const s3 = new aws.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID
   }
 })
-
+let AWSImage = null
 const upload = multer({
 
   storage: multerS3({
@@ -47,6 +47,8 @@ const upload = multer({
     key(req, file, cb) {
       var fileName = new Date().toISOString().replace(/:/g, '-') + '.jpg'
       req.savedUrl = `https://s3.amazonaws.com/s3/buckets/fridgely/${fileName}`
+      AWSImage = req.savedUrl
+
       cb(null, fileName);
     }
   })
@@ -58,7 +60,7 @@ function runTheLoop() {
     const app = new Clarifai.App({
     apiKey: theApiKey
     })
-    return app.models.predict(Clarifai.FOOD_MODEL, req.savedUrl)
+    return app.models.predict(Clarifai.FOOD_MODEL, AWSImage)
     // return app.models.predict(Clarifai.FOOD_MODEL, 'https://upload.wikimedia.org/wikipedia/commons/c/cc/Yours_Food_Logo.jpg')
         .then(function(response) {
           return response.outputs[0].data.concepts[1].name
