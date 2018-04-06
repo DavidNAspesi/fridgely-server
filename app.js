@@ -84,6 +84,7 @@ function runThisShit(foodItems) {
     // for (let i=0;i<15;i++) {
     //   console.log(res.recipes[i].title + res.recipes[i].recipe_id)
     // }
+    getRecipes(res.recipes)
   })
   .catch(function(err) {
     console.log(err)
