@@ -43,57 +43,42 @@ const upload = multer({
 })
 
 function runClarifai(image) {
-    let nameStuff = ''
     const app = new Clarifai.App({
     apiKey: theApiKey
     })
-<<<<<<< HEAD
     return app.models.predict(Clarifai.FOOD_MODEL, image)
         .then(response => {
-=======
-    // console.log(AWSImage);
-    // return app.models.predict(Clarifai.FOOD_MODEL, req.savedUrl)
-    return app.models.predict(Clarifai.FOOD_MODEL, 'https://upload.wikimedia.org/wikipedia/commons/c/cc/Yours_Food_Logo.jpg')
-        .then(function(response) {
->>>>>>> c38a87375fec4789a167844788d5e6a57e0f9880
           return response.outputs[0].data.concepts[1].name
         })
         .then(res => {
           console.log(res)
-          return runThisShit(res)
+          return runFood2Fork(res)
         })
 }
 
-function runThisShit(foodItems) {
-  console.log("made it to runFood2Fork")
-  console.log(global.globalString);
+let recipeResults = []
 
+function runFood2Fork(foodItems) {
+  console.log("made it to runFood2Fork")
   let foodURL = 'http://food2fork.com/api/search?key=5761d9561765b7936c21a38f6afa5786&q=' + foodItems
   return fetch(foodURL)
   .then(res => {
     return res.json()
   })
-  .then(res => {
-    console.log(res)
+  .then(recipes => {
+    // console.log(recipes.recipes)
+    recipeResults = recipes.recipes
+    // console.log(recipeResults)
   })
 }
 
 app.post("/upload", upload.single("photo"), (req, res, next) => {
-<<<<<<< HEAD
-  console.log(req.file.location)
   runClarifai(req.file.location)
-  .then(results => {
-=======
-  runTheLoop().then(function(results) {
-    console.log(req.file.filename);
->>>>>>> c38a87375fec4789a167844788d5e6a57e0f9880
-    res.json({
-      // url:req.file.location,
-      url: req.savedUrl,
-      data: results
-    })
-  })
   .catch(next)
+})
+
+app.get("/recipe", (req, res, next) => {
+  res.send(recipeResults)
 })
 
 app.use((req, res, next) => {
