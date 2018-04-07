@@ -12,7 +12,6 @@ const Clarifai = require('clarifai')
 
 const theApiKey = 'd6b1c7e0f3804ee693677ebe07e9e490'
 
-
 app.use(morgan("dev"))
 app.use(bodyParser.json())
 app.use(cors())
@@ -34,9 +33,8 @@ const s3 = new aws.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID
   }
 })
-let AWSImage = null
+// AWSImage = null
 const upload = multer({
-
   storage: multerS3({
     s3: s3,
     bucket: process.env.AWS_BUCKET,
@@ -47,21 +45,21 @@ const upload = multer({
     key(req, file, cb) {
       var fileName = new Date().toISOString().replace(/:/g, '-') + '.jpg'
       req.savedUrl = `https://s3.amazonaws.com/s3/buckets/fridgely/${fileName}`
-      AWSImage = req.savedUrl
-
+      console.log(AWSImage + "AWSImage");
       cb(null, fileName);
     }
   })
 })
 
-
 function runTheLoop() {
+  // globalString = 'shit'
     let nameStuff = ''
     const app = new Clarifai.App({
     apiKey: theApiKey
     })
-    return app.models.predict(Clarifai.FOOD_MODEL, AWSImage)
-    // return app.models.predict(Clarifai.FOOD_MODEL, 'https://upload.wikimedia.org/wikipedia/commons/c/cc/Yours_Food_Logo.jpg')
+    // console.log(AWSImage);
+    // return app.models.predict(Clarifai.FOOD_MODEL, req.savedUrl)
+    return app.models.predict(Clarifai.FOOD_MODEL, 'https://upload.wikimedia.org/wikipedia/commons/c/cc/Yours_Food_Logo.jpg')
         .then(function(response) {
           return response.outputs[0].data.concepts[1].name
         })
@@ -70,11 +68,14 @@ function runTheLoop() {
           return runThisShit(res)
         })
 }
+// globalString = 'shit'
 
 let cummy = null
 
 function runThisShit(foodItems) {
   console.log("made it to runThisShit")
+  console.log(global.globalString);
+
   let foodURL = 'http://food2fork.com/api/search?key=5761d9561765b7936c21a38f6afa5786&q=' + foodItems
   return fetch(foodURL)
   .then(function(res) {
@@ -88,12 +89,12 @@ function runThisShit(foodItems) {
   })
 }
 
+runTheLoop()
 // var shit = []
 //
 app.get("/cummy", (request, response, next) => {
   response.json(cummy)
 });
-
 
 // function getRecipes(recipes) {
 //   console.log(recipes);
@@ -101,7 +102,6 @@ app.get("/cummy", (request, response, next) => {
 //     response.json({recipes})
 //   });
 // }
-
 
 app.post("/upload", upload.single("photo"), (req, res, next) => {
   runTheLoop().then(function(results) {
