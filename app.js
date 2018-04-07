@@ -9,7 +9,6 @@ const multerS3 = require("multer-s3")
 const aws = require("aws-sdk")
 const fetch = require('node-fetch')
 const Clarifai = require('clarifai')
-const theApiKey = 'd6b1c7e0f3804ee693677ebe07e9e490'
 
 app.use(morgan("dev"))
 app.use(bodyParser.json())
@@ -43,7 +42,7 @@ const upload = multer({
 
 function runClarifai(image) {
     const app = new Clarifai.App({
-    apiKey: theApiKey
+    apiKey: process.env.FOOD_TO_FORK_KEY
     })
     return app.models.predict(Clarifai.FOOD_MODEL, image)
         .then(response => {
