@@ -42,7 +42,7 @@ const upload = multer({
   })
 })
 
-function runTheLoop(image) {
+function runClarifai(image) {
     let nameStuff = ''
     const app = new Clarifai.App({
     apiKey: theApiKey
@@ -72,7 +72,8 @@ function runThisShit(foodItems) {
 }
 
 app.post("/upload", upload.single("photo"), (req, res, next) => {
-  runTheLoop(req.file.location)
+  console.log(req.file.location)
+  runClarifai(req.file.location)
   .then(results => {
     res.json({
       url: req.savedUrl,
