@@ -9,7 +9,6 @@ const multerS3 = require("multer-s3")
 const aws = require("aws-sdk")
 const fetch = require('node-fetch')
 const Clarifai = require('clarifai')
-
 const theApiKey = 'd6b1c7e0f3804ee693677ebe07e9e490'
 
 app.use(morgan("dev"))
