@@ -66,9 +66,7 @@ function runFood2Fork(foodItems) {
     return res.json()
   })
   .then(recipes => {
-    // console.log(recipes.recipes)
     recipeResults = recipes.recipes
-    // console.log(recipeResults)
   })
 }
 
