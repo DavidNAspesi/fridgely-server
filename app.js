@@ -58,7 +58,7 @@ function runClarifai(image) {
 }
 
 function runThisShit(foodItems) {
-  console.log("made it to runThisShit")
+  console.log("made it to runFood2Fork")
   console.log(global.globalString);
 
   let foodURL = 'http://food2fork.com/api/search?key=5761d9561765b7936c21a38f6afa5786&q=' + foodItems
