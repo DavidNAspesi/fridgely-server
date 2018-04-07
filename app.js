@@ -45,7 +45,7 @@ const upload = multer({
     key(req, file, cb) {
       var fileName = new Date().toISOString().replace(/:/g, '-') + '.jpg'
       req.savedUrl = `https://s3.amazonaws.com/s3/buckets/fridgely/${fileName}`
-      console.log(AWSImage + "AWSImage");
+      //console.log(AWSImage + "AWSImage");
       cb(null, fileName);
     }
   })
