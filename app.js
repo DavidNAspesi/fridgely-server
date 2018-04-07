@@ -105,6 +105,7 @@ app.get("/cummy", (request, response, next) => {
 
 app.post("/upload", upload.single("photo"), (req, res, next) => {
   runTheLoop().then(function(results) {
+    console.log(req.file.filename);
     res.json({
       // url:req.file.location,
       url: req.savedUrl,
