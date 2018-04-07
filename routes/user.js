@@ -17,9 +17,9 @@ router.get("/:id", (request, response, next) => {
 router.get("/recipes/:id", (request, response, next) => {
     queries.read(request.params.id).then(users => {
         if(users) { response.json({
-          for (let i=0;i<users.users.recipes.split(',').length; i++) {
-            let eachRecipe =  users.users.recipes.split(',')[i]
-            let pieceOfRecipe = eachRecipe.split('$')
+          for (var i=0;i<users.users.recipes.split(',').length; i++) {
+            var eachRecipe =  users.users.recipes.split(',')[i]
+            var pieceOfRecipe = eachRecipe.split('$')
           }
           response.json({pieceOfRecipe})
         }) } else {response.status(404).json({message: 'Nothing Here'})}
