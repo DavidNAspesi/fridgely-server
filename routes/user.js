@@ -14,18 +14,6 @@ router.get("/:id", (request, response, next) => {
     }).catch(next);
 });
 
-router.get("/recipes/:id", (request, response, next) => {
-    queries.read(request.params.id).then(users => {
-        if(users) { response.json({
-          for (i=0;i<users.users.recipes.split(',').length; i++) {
-            eachRecipe =  users.users.recipes.split(',')[i]
-            pieceOfRecipe = eachRecipe.split('$')
-          }
-          response.json({pieceOfRecipe})
-        }) } else {response.status(404).json({message: 'Nothing Here'})}
-    }).catch(next);
-});
-
 router.post("/", (request, response, next) => {
     queries.create(request.body)
     .then(users => {
