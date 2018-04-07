@@ -42,7 +42,7 @@ const upload = multer({
 
 function runClarifai(image) {
     const app = new Clarifai.App({
-    apiKey: process.env.FOOD_TO_FORK_KEY
+    apiKey: process.env.CLARIFAI_KEY
     })
     return app.models.predict(Clarifai.FOOD_MODEL, image)
         .then(response => {
