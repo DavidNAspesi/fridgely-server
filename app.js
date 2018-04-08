@@ -49,7 +49,6 @@ function runClarifai(image) {
           return response.outputs[0].data.concepts[1].name
         })
         .then(res => {
-          console.log(res)
           return runFood2Fork(res)
         })
 }
@@ -61,7 +60,6 @@ function runFood2Fork(foodItems) {
   let foodURL = 'http://food2fork.com/api/search?key=5761d9561765b7936c21a38f6afa5786&q=' + foodItems
   return fetch(foodURL)
   .then(res => {
-    console.log(res)
     return res.json()
   })
   .then(recipes => {
