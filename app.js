@@ -65,7 +65,7 @@ function runFood2Fork(foodItems) {
     return res.json()
   })
   .then(recipes => {
-    recipeResults = recipes.recipes[0]
+    recipeResults = recipes.recipes
   })
 }
 
