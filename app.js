@@ -57,7 +57,7 @@ let recipeResults = []
 
 function runFood2Fork(foodItems) {
   console.log("made it to runFood2Fork")
-  let foodURL = 'http://food2fork.com/api/search?key=5761d9561765b7936c21a38f6afa5786&q=' + foodItems
+  let foodURL = 'http://food2fork.com/api/search?key=5761d9561765b7936c21a38f6afa5786&q=' + foodItems 
   return fetch(foodURL)
   .then(res => {
     return res.json()
