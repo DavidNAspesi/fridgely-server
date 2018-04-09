@@ -5,27 +5,27 @@ exports.seed = function(knex, Promise) {
       var user = [{
         id: 1,
         userName: 'Chance Scott-Burke',
-        recipes: '',
+        recipes: '47102$http://static.food2fork.com/4983866032_304b02a819_o22e2.jpg$https://thepioneerwoman.com/cooking/2010/09/chocolate-chip-cookie-sweet-rolls/$Chocolate_Chip_Cookie_Sweet_Rolls,',
         other: ''
       },{
         id: 2,
         userName: 'Shaun Seidman',
-        recipes: '',
+        recipes: '47102$http://static.food2fork.com/4983866032_304b02a819_o22e2.jpg$https://thepioneerwoman.com/cooking/2010/09/chocolate-chip-cookie-sweet-rolls/$Chocolate_Chip_Cookie_Sweet_Rolls,',
         other: ''
       },{
         id: 3,
         userName: 'Dave Aspesi',
-        recipes: '',
+        recipes: '47102$http://static.food2fork.com/4983866032_304b02a819_o22e2.jpg$https://thepioneerwoman.com/cooking/2010/09/chocolate-chip-cookie-sweet-rolls/$Chocolate_Chip_Cookie_Sweet_Rolls,',
         other: ''
       },{
         id: 4,
         userName: 'Will Ferens',
-        recipes: '',
+        recipes: '47102$http://static.food2fork.com/4983866032_304b02a819_o22e2.jpg$https://thepioneerwoman.com/cooking/2010/09/chocolate-chip-cookie-sweet-rolls/$Chocolate_Chip_Cookie_Sweet_Rolls,',
         other: ''
       },{
         id: 5,
         userName: 'Seth Caparelli',
-        recipes: '',
+        recipes: '47102$http://static.food2fork.com/4983866032_304b02a819_o22e2.jpg$https://thepioneerwoman.com/cooking/2010/09/chocolate-chip-cookie-sweet-rolls/$Chocolate_Chip_Cookie_Sweet_Rolls,',
         other: ''
       }]
       return knex('users').insert(user)
