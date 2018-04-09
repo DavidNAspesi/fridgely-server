@@ -65,12 +65,16 @@ function runFood2Fork(foodItems) {
     return res.json()
   })
   .then(recipes => {
-    recipeResults = recipes.recipes
+    recipeResults = recipes.rescipes
+    return recipes.recipes
   })
 }
 
 app.post("/upload", upload.single("photo"), (req, res, next) => {
   runClarifai(req.file.location)
+  .then(data=> {
+    res.send(data)
+  })
   .catch(next)
 })
 
