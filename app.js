@@ -53,10 +53,7 @@ function runClarifai(image) {
           return runFood2Fork(res)
         })
 }
-
-
-
-
+let recipeList = []
 
 function runFood2Fork(foodItems) {
   console.log("made it to runFood2Fork")
@@ -67,7 +64,9 @@ function runFood2Fork(foodItems) {
     return res.json()
   })
   .then(recipes => {
+    recipeList = recipes.recipes
     return recipes.recipes
+
   })
 }
 
@@ -78,10 +77,10 @@ app.post("/upload", upload.single("photo"), (req, res, next) => {
   })
   .catch(next)
 })
-
-// app.get("/recipe", (req, res, next) => {
-//   res.send(recipeResults)
-// })
+//
+app.get("/recipe", (req, res, next) => {
+  res.send(recipeList)
+})
 
 app.use((req, res, next) => {
     const err = new Error("Not Found")
